@@ -34,6 +34,14 @@ class BorelSet(object):
         '''
         return self.union(b) 
 
+    def __sub__(self, b):
+        '''
+        b is another instance of BorelSet.
+        '''
+        b_complement = BorelSet("")
+        b_complement.intervals = b.complement()
+        return self.intersect(b_complement) 
+
     def __nonzero__(self):
         return self.intervals != []
 
@@ -90,12 +98,6 @@ class BorelSet(object):
             complement_intervals.append(Interval(c_left, float("inf"),\
                     c_left_closed, False))
         return complement_intervals 
-
-    def subtract(self, b):
-        '''
-        b is another instance of BorelSet.
-        '''
-        return None
 
     def min(self):
         '''
